@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plagiarism Detector</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-top: 20px;
+      font-size: 1.8em;
+      text-align: center;
+    }
+
+    h3 {
+      color: #27ae60;
+      margin-top: 20px;
+      font-size: 1.5em;
+      text-align: center;
+    }
+
+    hr {
+      width: 80%;
+      margin: 30px 0;
+      border: 1px solid #ddd;
+    }
+
+    /* Form Styling */
+    form {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 80%;
+      max-width: 500px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    label {
+      font-size: 1.1em;
+      color: #555;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 90%;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 15px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    /* List Styling */
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #ecf0f1;
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    pre {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 1em;
+      color: #333;
+      word-wrap: break-word;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      form {
+        width: 95%;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Plagiarism Detector</h1>
+
+  <form action="/" method="post" id="detect-plagiarism-form">
+    <h2>Step 1: Detect Plagiarism</h2>
+    <label for="directory">Directory to check for plagiarism:</label>
+    <input type="text" id="directory" name="directory" required><br><br>
+    <input type="submit" value="Detect Plagiarism">
+  </form>
+
+  <hr>
+
+  <form action="/generate" method="post" id="generate-anti-plagiarism-form">
+    <h2>Step 2: Generate Anti-Plagiarized Files</h2>
+    <input type="submit" value="Generate Anti-Plagiarized Files">
+  </form>
+
+  <div>
+    {% if plagiarized_files %}
+      <h3>Plagiarism Detected:</h3>
+      <ul>
+        {% for file in plagiarized_files %}
+          <li>
+            <h4>Plagiarized File:</h4>
+            <pre>{{ file }}</pre>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+  <div>
+    {% if updated_files %}
+      <h3>Anti-Plagiarized Files Generated:</h3>
+      <ul>
+        {% for file in updated_files %}
+          <li>
+            <h4>Original File:</h4>
+            <pre>{{ file.original_file }}</pre>
+            <h4>New Anti-Plagiarized File:</h4>
+            <pre>{{ file.new_file }}</pre>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</body>
+</html>

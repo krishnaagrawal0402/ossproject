@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plagiarism Detector Results</title>
+</head>
+<body>
+  <h1>Plagiarism Detector Results</h1>
+  <ul>
+    {% for file in updated_files %}
+      <li>
+        <h2>Plagiarism Detected in: <a href="file://{{ file.original_file }}">{{ file.original_file }}</a></h2>
+        <h3>Original Code:</h3>
+        <pre>{{ file.original_code }}</pre>
+        <h3>Anti-Plagiarized Code:</h3>
+        <pre>{{ file.anti_plagiarized_code }}</pre>
+        <h3>New File Created: <a href="file://{{ file.new_file }}">{{ file.new_file }}</a></h3>
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
